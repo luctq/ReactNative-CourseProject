@@ -5,13 +5,13 @@ export default function FilmDescription({ route, navigation }) {
   const notPosterFound =
     "https://www.2queue.com/wp-content/uploads/tdomf/4299/movie-poster-coming-soon.png";
   return (
-    <View style={{ flex:1, flexDirection: 'column'}}>
+    <View style={{ flex:350, flexDirection: 'column'}}>
       <View style={styles.container}>
       <Image
         source={{
           uri: item.Poster != "N/A" ? item.Poster : notPosterFound,
         }}
-        style={{ flex: 1, height: 265, width: 200 }}
+        style={{ flex: 1, height: 350, width: 200 }}
       />
       <View style={{ flex: 1, marginLeft: 20, marginBottom: 20}}>
         <Text style={{ fontWeight: "bold", fontSize: 30 }}>{item.Title}</Text>
