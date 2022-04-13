@@ -10,3 +10,8 @@ export const newsLoading = () => {
 		type: "newsLoading"
 	};
 }
+export const topHeadlinesLoading = () => {
+	return {
+		type: "topHeadlinesLoading"
+	};
+}
