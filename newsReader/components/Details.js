@@ -24,7 +24,6 @@ onPress() {
     const {item} = this.props;
     // Link to article page on BBC website
     const url = item.url;
-	console.log(url)
 	WebBrowser.openBrowserAsync(url);
   }
 

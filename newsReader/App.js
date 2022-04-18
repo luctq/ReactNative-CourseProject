@@ -2,48 +2,60 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ListScreen from "./screens/ListScreen";
+import ListNewsScreen from "./screens/ListNewsScreen";
 import DetailsScreen from "./screens/DetailsScreen";
 import { store } from "./resources/store";
+import { otherStore } from "./resources/otherStore";
 import { Provider } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import ListTopHeadlinesScreen from "./screens/ListTopHeadlinesScreen";
+import ListScreen from "./screens/ListScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-function HomeScreen() {
+function NewsScreen() {
   return (
-    <Stack.Navigator>
-          <Stack.Screen name="News" component={ListScreen} />
-          <Stack.Screen name="Details" component={DetailsScreen} />
+    //<Provider store={store}>
+      <Stack.Navigator>
+      <Stack.Screen name="News" component={ListScreen} initialParams={{ api: "news" }}/>
+      <Stack.Screen name="Details" component={DetailsScreen} />
     </Stack.Navigator>
+    //</Provider>
+    
   );
 }
 
-function SettingsScreen() {
+function TopHeadlineScreen() {
   return (
-    <Stack.Navigator>
-          <Stack.Screen name="Top headlines" component={ListScreen} />
-          <Stack.Screen name="Details" component={DetailsScreen} />
+    //<Provider store={otherStore}>
+      <Stack.Navigator>
+      <Stack.Screen name="Top headlines" component={ListScreen} initialParams={{ api: "topHeadlines" }} />
+      <Stack.Screen name="Details" component={DetailsScreen} />
     </Stack.Navigator>
+   // </Provider>
+    
   );
 }
 
 export default function App() {
   return (
     <Provider store={store}>
-      {/* <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={ListScreen} />
-          <Stack.Screen name="Details" component={DetailsScreen} />
-        </Stack.Navigator>
-      </NavigationContainer> */}
-     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="News" component={HomeScreen} options={{headerShown: false}}/>
-        <Tab.Screen name="TopHeadlines" component={SettingsScreen} options={{headerShown: false}}/>
-      </Tab.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="News"
+            component={NewsScreen}
+            options={{ headerShown: false, unmountOnBlur: true }}
+          />
+          <Tab.Screen
+            name="TopHeadlines"
+            component={TopHeadlineScreen}
+            options={{ headerShown: false, unmountOnBlur: true }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
     </Provider>
+      
   );
 }
 

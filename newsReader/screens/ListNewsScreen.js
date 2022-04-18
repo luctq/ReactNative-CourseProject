@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getNews, getTopHeadlines } from "../resources/api";
+import { getNews } from "../resources/api";
 import List from "../components/List";
 import Loading from "../components/Loading";
 import { View, Button } from "react-native";
 
 // Set up list screen and connect to store
-class ListScreen extends Component {
+class ListNewsScreen extends Component {
   constructor(props) {
     super(props);
     this.navigateToDetail = this.navigateToDetail.bind(this);
   }
 
   componentDidMount() {
-    this.props.onLoad(this.props.route.params.api);
+    this.props.onLoad();
   }
 
   navigateToDetail(item) {
@@ -48,7 +48,7 @@ class ListScreen extends Component {
 }
 
 // Set header bar for list screen
-ListScreen.navigationOptions = {
+ListNewsScreen.navigationOptions = {
   title: "BBC News Headlines",
 };
 
@@ -61,15 +61,8 @@ const mapStateToProps = (state) => ({
 // Call the API when the screen loads
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLoad: (api) => {
-        if (api == "news") {
-            dispatch(getNews());
-        } else if (api == "topHeadlines") {
-            dispatch(getTopHeadlines());
-        }
-        
-    },
+    onLoad: () => dispatch(getNews()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ListNewsScreen);
