@@ -21,7 +21,7 @@ export const getTopHeadlines = () => dispatch => {
 	dispatch(topHeadlinesLoading()),
 
 	// Fetch news articles from the API
-    axios.get("https://newsapi.org/v2/top-headlines?country=us&category=sports&language=en&apiKey=59df7e86544c46db88d091ec9bcf2a9c")
+    axios.get("https://newsapi.org/v2/top-headlines?source=cnn&language=en&apiKey=59df7e86544c46db88d091ec9bcf2a9c")
     .then(response => {
         const headlines = response.data;
 

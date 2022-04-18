@@ -27,22 +27,15 @@ class ListScreen extends Component {
 
     return (
       <View>
-         <View>
-        {/*Display spinner if the news is loading, otherwise display articles list*/}
-        {this.props.isLoading ? (
-          <Loading />
-        ) : (
-          <List item={articles} navigateToDetail={this.navigateToDetail} />
-        )}
+        <View>
+          {/*Display spinner if the news is loading, otherwise display articles list*/}
+          {this.props.isLoading ? (
+            <Loading />
+          ) : (
+            <List item={articles} navigateToDetail={this.navigateToDetail} />
+          )}
+        </View>
       </View>
-      {/* <Button
-          onPress={console.log('view more')}
-          title="View More"
-          color="#841584"
-          style={{ marginHorizontal: 'auto'}}
-        /> */}
-      </View>
-     
     );
   }
 }
@@ -62,12 +55,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     onLoad: (api) => {
-        if (api == "news") {
-            dispatch(getNews());
-        } else if (api == "topHeadlines") {
-            dispatch(getTopHeadlines());
-        }
-        
+      if (api == "news") {
+        dispatch(getNews());
+      } else if (api == "topHeadlines") {
+        dispatch(getTopHeadlines());
+      }
     },
   };
 };
