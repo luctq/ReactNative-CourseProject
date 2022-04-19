@@ -11,7 +11,7 @@ class ViewMore extends Component {
 
   render() {
     return (
-      <View style={styles.link}>
+      <View>
         <TouchableHighlight
           underlayColor="#FF6347"
           style={styles.button}
@@ -29,13 +29,12 @@ const styles = StyleSheet.create({
     },
   
     button: {
-      marginTop: 30,
       backgroundColor: "blue",
-      width: 120,
       height: 50,
       borderRadius: 5,
       justifyContent: "center",
       alignItems: "center",
+      marginBottom: 5
     },
   
     buttonText: {

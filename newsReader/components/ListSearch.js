@@ -3,12 +3,25 @@ import ListItem from "./ListItem";
 import { StyleSheet, View, Text, FlatList } from "react-native";
 import ViewMore from "./ViewMore";
 
-class List extends Component {
+class ListSearch extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      news: [],
+      isLoading: false,
+    };
     this.renderItem = this.renderItem.bind(this);
     this.keyExtractor = this.keyExtractor.bind(this);
   }
+  setNews = (news) => {
+    this.setState({ news: news, isLoading: true });
+  };
+  componentDidUpdate() {
+    this.setState({ isLoading: false });
+  }
+  renderHearder = () => {
+    return <Search setNews={this.setNews} />;
+  };
   renderItem({ item }) {
     const navigate = () => {
       this.props.navigateToDetail(item);
@@ -26,7 +39,7 @@ class List extends Component {
   }
 
   render() {
-    const { item } = this.props;
+    const { item } = this.state.news;
     return (
       <View>
         <FlatList
@@ -35,9 +48,11 @@ class List extends Component {
           keyExtractor={this.keyExtractor}
           ItemSeparatorComponent={this.renderSeparator}
           ListFooterComponent={ViewMore}
+          ListHeaderComponent={this.renderHearder}
         />
       </View>
     );
   }
 }
-export default List;
+
+export default ListSearch;

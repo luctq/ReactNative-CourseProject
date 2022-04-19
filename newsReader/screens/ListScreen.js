@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getNews, getTopHeadlines } from "../resources/api";
+import {
+  getNews,
+  getTopHeadlines,
+  getBusinessNews,
+  getEntertainmentNews,
+  getGeneralNews,
+  getHealthNews,
+  getScienceNews,
+  getSportsNews,
+  getTechnologyNews,
+} from "../resources/api";
 import List from "../components/List";
 import Loading from "../components/Loading";
 import { View, Button } from "react-native";
@@ -40,11 +50,6 @@ class ListScreen extends Component {
   }
 }
 
-// Set header bar for list screen
-ListScreen.navigationOptions = {
-  title: "BBC News Headlines",
-};
-
 // Get news and loading status from store and map to props
 const mapStateToProps = (state) => ({
   news: state.news,
@@ -55,10 +60,25 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     onLoad: (api) => {
-      if (api == "news") {
+      console.log(api);
+      if (api == "News") {
         dispatch(getNews());
-      } else if (api == "topHeadlines") {
+      } else if (api == "TopHeadlines") {
         dispatch(getTopHeadlines());
+      } else if (api == "BusinessNews") {
+        dispatch(getBusinessNews());
+      } else if (api == "EntertainmentNews") {
+        dispatch(getEntertainmentNews());
+      } else if (api == "GeneralNews") {
+        dispatch(getGeneralNews());
+      } else if (api == "HealthNews") {
+        dispatch(getHealthNews());
+      } else if (api == "ScienceNews") {
+        dispatch(getScienceNews());
+      } else if (api == "SportsNews") {
+        dispatch(getSportsNews());
+      } else if (api == "TechnologyNews") {
+        dispatch(getTechnologyNews());
       }
     },
   };
