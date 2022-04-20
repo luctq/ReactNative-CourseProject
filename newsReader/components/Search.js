@@ -1,6 +1,7 @@
 import React, {Component}from "react";
 import { TextInput, View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
+import { getSearchNews } from "../resources/api";
 class Search extends Component {
   constructor(props) {
     super(props)
@@ -8,12 +9,14 @@ class Search extends Component {
   }
   async handleOnChangeText(textSearch)  {
     await this.props.onLoad(textSearch);
-    this.props.setNews(this.props.news)
+    // console.log(this.props.news.articles)
+    await this.props.setNews(this.props.news.articles)
   }
   render() {
     return (
       <View>
         <TextInput style={styles.inputBorder} placeholder="Search" onChangeText={this.handleOnChangeText}/>
+        {/* <Text>{this.props.news.articles}</Text> */}
       </View>
     );
   }
@@ -40,7 +43,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     onLoad: (textSearch) => {
-      
+      dispatch(getSearchNews(textSearch))
     },
   };
 };

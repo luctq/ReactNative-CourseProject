@@ -16,7 +16,7 @@ class StackListScreen extends Component {
           initialParams={{ api: this.props.route.params.typeScreen}}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} options={{headerShown: false}}/>
       </Stack.Navigator>
     );
   }

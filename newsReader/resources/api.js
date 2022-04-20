@@ -19,8 +19,10 @@ import {
   setTechnologyNews,
   technologyNewsLoading,
   searchNews,
-  searchNewsLoading
+  searchNewsLoading,
+  setSearchNews
 } from "./actions";
+import { API_KEY } from "../apiKey/API_KEY";
 /**
  * GET NEWS
  * @returns 
@@ -31,7 +33,7 @@ export const getNews = () => (dispatch) => {
     // Fetch news articles from the API
     axios
       .get(
-        "https://newsapi.org/v2/top-headlines?country=us&apiKey=59df7e86544c46db88d091ec9bcf2a9c"
+        `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}`
       )
       .then((response) => {
         const news = response.data;
@@ -50,7 +52,7 @@ export const getTopHeadlines = () => (dispatch) => {
     // Fetch news articles from the API
     axios
       .get(
-        "https://newsapi.org/v2/top-headlines?country=us&category=business&language=en&apiKey=59df7e86544c46db88d091ec9bcf2a9c"
+        `https://newsapi.org/v2/top-headlines?category=business&pageSize=100&language=en&apiKey=${API_KEY}`
       )
       .then((response) => {
         const headlines = response.data;
@@ -69,7 +71,7 @@ export const getBusinessNews = () => (dispatch) => {
     // Fetch news articles from the API
     axios
       .get(
-        "https://newsapi.org/v2/top-headlines?country=us&category=business&language=en&apiKey=59df7e86544c46db88d091ec9bcf2a9c"
+        `https://newsapi.org/v2/top-headlines?category=business&pageSize=100&language=en&apiKey=${API_KEY}`
       )
       .then((response) => {
         const businessNews = response.data;
@@ -88,7 +90,7 @@ export const getEntertainmentNews = () => (dispatch) => {
     // Fetch news articles from the API
     axios
       .get(
-        "https://newsapi.org/v2/top-headlines?country=us&category=entertainment&language=en&apiKey=59df7e86544c46db88d091ec9bcf2a9c"
+        `https://newsapi.org/v2/top-headlines?category=entertainment&pageSize=100&language=en&apiKey=${API_KEY}`
       )
       .then((response) => {
         const entertainmentNews = response.data;
@@ -103,11 +105,12 @@ export const getEntertainmentNews = () => (dispatch) => {
  */
 export const getGeneralNews = () => (dispatch) => {
   // Dispatch newsLoading action to show spinner while news is loading
+  console.log(`https://newsapi.org/v2/top-headlines?category=general&pageSize=100&language=en&apiKey=${API_KEY}`)
   dispatch(generalNewsLoading()),
     // Fetch news articles from the API
     axios
       .get(
-        "https://newsapi.org/v2/top-headlines?country=us&category=general&language=en&apiKey=59df7e86544c46db88d091ec9bcf2a9c"
+        `https://newsapi.org/v2/top-headlines?category=general&pageSize=100&language=en&apiKey=${API_KEY}`
       )
       .then((response) => {
         const generalNews = response.data;
@@ -126,7 +129,7 @@ export const getHealthNews = () => (dispatch) => {
     // Fetch news articles from the API
     axios
       .get(
-        "https://newsapi.org/v2/top-headlines?country=us&category=health&language=en&apiKey=59df7e86544c46db88d091ec9bcf2a9c"
+        `https://newsapi.org/v2/top-headlines?category=health&pageSize=100&language=en&apiKey=${API_KEY}`
       )
       .then((response) => {
         const healthNews = response.data;
@@ -145,7 +148,7 @@ export const getScienceNews = () => (dispatch) => {
     // Fetch news articles from the API
     axios
       .get(
-        "https://newsapi.org/v2/top-headlines?country=us&category=science&language=en&apiKey=59df7e86544c46db88d091ec9bcf2a9c"
+        `https://newsapi.org/v2/top-headlines?category=science&pageSize=100&language=en&apiKey=${API_KEY}`
       )
       .then((response) => {
         const scienceNews = response.data;
@@ -164,7 +167,7 @@ export const getSportsNews = () => (dispatch) => {
     // Fetch news articles from the API
     axios
       .get(
-        "https://newsapi.org/v2/top-headlines?country=us&category=sports&language=en&apiKey=59df7e86544c46db88d091ec9bcf2a9c"
+        `https://newsapi.org/v2/top-headlines?category=sports&pageSize=100&language=en&apiKey=${API_KEY}`
       )
       .then((response) => {
         const sportsNews = response.data;
@@ -183,7 +186,7 @@ export const getTechnologyNews = () => (dispatch) => {
     // Fetch news articles from the API
     axios
       .get(
-        "https://newsapi.org/v2/top-headlines?country=us&category=technology&language=en&apiKey=59df7e86544c46db88d091ec9bcf2a9c"
+        `https://newsapi.org/v2/top-headlines?category=technology&pageSize=100&language=en&apiKey=${API_KEY}`
       )
       .then((response) => {
         const technologyNews = response.data;
@@ -193,18 +196,19 @@ export const getTechnologyNews = () => (dispatch) => {
       });
 };
 
-// export const searchNews = (textSearch) => (dispatch) => {
-//   // Dispatch newsLoading action to show spinner while news is loading
-//   dispatch(searchNewsLoading()),
-//     // Fetch news articles from the API
-//     axios
-//       .get(
-//         `https://newsapi.org/v2/top-headlines?country=us&q=${textSearch}&language=en&apiKey=59df7e86544c46db88d091ec9bcf2a9c`
-//       )
-//       .then((response) => {
-//         const searchNews = response.data;
+export const getSearchNews = (textSearch) => (dispatch) => {
+  // Dispatch newsLoading action to show spinner while news is loading
+  //console.log(`https://newsapi.org/v2/top-headlines?q=${textSearch}&pageSize=100&language=en&apiKey=${API_KEY}`)
+  dispatch(searchNewsLoading()),
+    // Fetch news articles from the API
+    axios
+      .get(
+        `https://newsapi.org/v2/top-headlines?q=${textSearch}&pageSize=100&language=en&apiKey=${API_KEY}`
+      )
+      .then((response) => {
+        const searchNews = response.data;
 
-//         // Dispatch setNews action to set store to news articles
-//         dispatch(searchNews(searchNews));
-//       });
-// };
+        // Dispatch setNews action to set store to news articles
+        dispatch(setSearchNews(searchNews));
+      });
+};

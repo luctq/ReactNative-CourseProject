@@ -1,32 +1,20 @@
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-
-function Feed() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Feed Screen</Text>
-    </View>
-  );
-}
-
-function Article() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Article Screen</Text>
-    </View>
-  );
-}
-
+import React, {Component} from "react";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import StackListScreen from "./StackListScreen";
 const Drawer = createDrawerNavigator();
-
-function MyDrawer() {
-  return (
-    <Drawer.Navigator useLegacyImplementation>
-      <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Article" component={Article} />
-    </Drawer.Navigator>
-  );
+class DrawerListScreen extends Component {
+    render() {
+        return(
+            <Drawer.Navigator> 
+                <Drawer.Screen name="General" component={StackListScreen} initialParams={{typeScreen: "GeneralNews"}}  options={{ unmountOnBlur: true}}/>
+                <Drawer.Screen name="Bussiness" component={StackListScreen} initialParams={{typeScreen: "BusinessNews"}} options={{ unmountOnBlur: true}} />
+                <Drawer.Screen name="Entertainment" component={StackListScreen} initialParams={{typeScreen: "EntertainmentNews"}}  options={{ unmountOnBlur: true}}/>
+                <Drawer.Screen name="Health" component={StackListScreen} initialParams={{typeScreen: "HealthNews"}} options={{ unmountOnBlur: true}} />
+                <Drawer.Screen name="Science" component={StackListScreen} initialParams={{typeScreen: "ScienceNews"}} options={{ unmountOnBlur: true}} />
+                <Drawer.Screen name="Sport" component={StackListScreen} initialParams={{typeScreen: "SportsNews"}} options={{ unmountOnBlur: true}} />
+                <Drawer.Screen name="Technology" component={StackListScreen} initialParams={{typeScreen: "TechnologyNews"}} options={{ unmountOnBlur: true}} />
+            </Drawer.Navigator>
+        );
+    }
 }
-export default MyDrawer;
+export default DrawerListScreen;

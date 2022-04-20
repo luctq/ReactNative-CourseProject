@@ -34,7 +34,6 @@ class List extends Component {
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
           ItemSeparatorComponent={this.renderSeparator}
-          ListFooterComponent={ViewMore}
         />
       </View>
     );

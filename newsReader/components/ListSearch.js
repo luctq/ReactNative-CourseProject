@@ -1,24 +1,21 @@
 import React, { Component } from "react";
 import ListItem from "./ListItem";
 import { StyleSheet, View, Text, FlatList } from "react-native";
+import Search from "./Search";
 import ViewMore from "./ViewMore";
 
 class ListSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      news: [],
-      isLoading: false,
+      news: []
     };
     this.renderItem = this.renderItem.bind(this);
     this.keyExtractor = this.keyExtractor.bind(this);
   }
   setNews = (news) => {
-    this.setState({ news: news, isLoading: true });
+    this.setState({ news: news});
   };
-  componentDidUpdate() {
-    this.setState({ isLoading: false });
-  }
   renderHearder = () => {
     return <Search setNews={this.setNews} />;
   };
@@ -39,15 +36,13 @@ class ListSearch extends Component {
   }
 
   render() {
-    const { item } = this.state.news;
     return (
       <View>
         <FlatList
-          data={item}
+          data={this.state.news}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
           ItemSeparatorComponent={this.renderSeparator}
-          ListFooterComponent={ViewMore}
           ListHeaderComponent={this.renderHearder}
         />
       </View>

@@ -5,44 +5,33 @@ import { NavigationContainer } from "@react-navigation/native";
 import { store } from "./resources/store";
 import { Provider } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Search from "./components/Search";
 import SearchScreen from "./screens/SearchScreen";
-import TopTabListScreen from "./screens/TopTabListScreen";
+import DrawerListScreen from "./screens/DrawerListScreen";
+import DetailsScreen from "./screens/DetailsScreen";
+
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator()
 
 function NewsScreen() {
   return (
-    //<Provider store={store}>
-    // <Stack.Navigator>
-    //   <Stack.Screen
-    //     name="News"
-    //     component={ListScreen}
-    //     initialParams={{ api: "news" }}
-    //   />
-    //   <Stack.Screen name="Details" component={DetailsScreen} />
-    // </Stack.Navigator>
-    //</Provider>
-    <TopTabListScreen />
-    
+    <DrawerListScreen />
   );
 }
 
-// function TopHeadlineScreen() {
-//   return (
-//     <Provider store={otherStore}>
-//     <Stack.Navigator>
-//       <Stack.Screen
-//         name="TopHeadlines"
-//         component={ListScreen}
-//         initialParams={{ api: "topHeadlines" }}
-//       />
-//       <Stack.Screen name="Details" component={DetailsScreen} />
-//     </Stack.Navigator>
-//     </Provider>
-//     <StackListScreen typeScreen="TopHeadlines"/>
-//   );
-// }
+function StackSearchScreen() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="StackSearch"
+        component={SearchScreen}
+        options={{ headerShown: false}}
+      />
+      <Stack.Screen name="Details" component={DetailsScreen} options={{headerShown: false}}/>
+    </Stack.Navigator>
+  );
+}
 
 export default function App() {
   return (
@@ -50,10 +39,6 @@ export default function App() {
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
-            // headerTitleStyle: {
-            //   fontWeight: 'bold'
-            // }, 
-            // headerTitleAlign: 'center',
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
 
@@ -62,11 +47,6 @@ export default function App() {
               } else if (route.name === "Search") {
                 iconName = "search";
               }
-              // else if (route.name === 'TopHeadlines') {
-              //   iconName = "flash";
-              // }
-
-              // You can return any component that you like here!
               return <Ionicons name={iconName} size={size} color={color} />;
             },
             tabBarActiveTintColor: "tomato",
@@ -81,14 +61,9 @@ export default function App() {
               headerShown: false
             }}
           />
-          {/* <Tab.Screen
-            name="TopHeadlines"
-            component={TopHeadlineScreen}
-            options={{ unmountOnBlur: true }}
-          /> */}
           <Tab.Screen
             name="Search"
-            component={Search}
+            component={StackSearchScreen}
             options={{ unmountOnBlur: true }}
           />
         </Tab.Navigator>
