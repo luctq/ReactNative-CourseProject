@@ -14,7 +14,7 @@ Run code
 ## Project 1: Podomor Timer
 ```bash
 -Open the terminal
--cd project0
+-cd project1
 -npm install
 -expo start
 -Install expo client in your phone
@@ -23,7 +23,7 @@ Run code
 ## Project 2: Movie Brower
 ```bash
 -Open the terminal
--cd project0
+-cd project2
 -npm install
 -expo start
 -Install expo client in your phone
@@ -33,7 +33,7 @@ If apiKey is not actived. You can get here: http://www.omdbapi.com/ by your emai
 ## Project final: News Reader
 ```bash
 -Open the terminal
--cd project0
+-cd newsReader
 -npm install
 -expo start
 -Install expo client in your phone
